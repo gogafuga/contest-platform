@@ -1,0 +1,48 @@
+services:
+  app:
+    image: contest01:cloud
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:8080"
+    environment:
+      DATABASE_URL: postgres://contest:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/contest01?sslmode=disable
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN}
+      SESSION_TTL_HOURS: ${SESSION_TTL_HOURS:-336}
+      CONTEST_DURATION_SECONDS: ${CONTEST_DURATION_SECONDS:-5400}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: contest
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: contest01
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/migrations:/docker-entrypoint-initdb.d:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U contest -d contest01"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  postgres_data:

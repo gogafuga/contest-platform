@@ -1,0 +1,6 @@
+.bar { padding: .45rem 1.25rem; display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; font-size: .72rem; color: var(--text-mid); border-bottom: 1px solid var(--border); }
+.bar button { background: transparent; color: var(--accent); border: 0; text-decoration: underline; cursor: pointer; }
+.overlay { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 1rem; background: #000b; }
+.notice { width: min(100%, 640px); max-height: 90svh; overflow: auto; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border-bright); border-radius: 8px; }
+.notice p { font-size: .88rem; color: var(--text-mid); }
+.notice button { padding: .7rem 1rem; background: var(--accent); color: var(--bg); border: 0; border-radius: 4px; cursor: pointer; }

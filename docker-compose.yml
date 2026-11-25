@@ -1,0 +1,38 @@
+services:
+  app:
+    image: contest01:local
+    build: .
+    ports:
+      - "${PORT:-80}:8080"
+    environment:
+      DATABASE_URL: postgres://contest:contest@postgres:5432/contest01?sslmode=disable
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-dev-admin-token}
+      SESSION_TTL_HOURS: ${SESSION_TTL_HOURS:-336}
+      CONTEST_DURATION_SECONDS: ${CONTEST_DURATION_SECONDS:-5400}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/health"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: contest
+      POSTGRES_PASSWORD: contest
+      POSTGRES_DB: contest01
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U contest -d contest01"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  postgres_data:

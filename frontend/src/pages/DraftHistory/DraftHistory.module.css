@@ -1,0 +1,42 @@
+.page { max-width: 1440px; margin: 0 auto; padding: 2rem; }
+.heading { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.heading div { margin-right: auto; }
+.heading p { color: var(--accent); margin: 0; }
+.heading a { color: var(--accent); }
+.form, .controls { display: flex; align-items: end; gap: 1rem; flex-wrap: wrap; }
+.form label, .controls label { display: flex; flex-direction: column; gap: .35rem; flex: 1; min-width: 180px; }
+.form input, .form select, .controls select { width: 100%; padding: .6rem; background: var(--surface-2); color: var(--text); border: 1px solid var(--border-bright); border-radius: 4px; }
+.form button { padding: .65rem 1rem; background: var(--accent); color: var(--bg); border: 0; border-radius: 4px; cursor: pointer; }
+.form button:disabled { opacity: .5; }
+.note { color: var(--text-dim); font-size: .8rem; }
+.error { color: var(--danger); }
+.timeline { display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0; }
+.timeline input { width: 100%; accent-color: var(--accent); }
+.viewer { border: 1px solid var(--border-bright); min-width: 0; }
+@media (max-width: 600px) { .page { padding: 1rem; } }
+
+.events { margin: 1.5rem 0; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; }
+.events h2 { font-size: 1rem; }
+.eventScroll { max-height: 320px; overflow: auto; margin-bottom: 1rem; }
+.eventTable { width: 100%; border-collapse: collapse; font-size: .78rem; }
+.eventTable th, .eventTable td { padding: .6rem; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+.eventTable th { position: sticky; top: 0; background: var(--surface-2); }
+.events button { background: var(--surface-2); color: var(--accent); border: 1px solid var(--border-bright); padding: .5rem .75rem; border-radius: 4px; cursor: pointer; }
+.events button:disabled { opacity: .5; }
+
+.picker { position: relative; flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: .35rem; }
+.picker label { min-width: 0; }
+.picker small { font-size: .7rem; overflow-wrap: anywhere; }
+.dropdown { position: absolute; top: 100%; left: 0; right: 0; z-index: 20; max-height: 320px; overflow: auto; background: var(--surface-2); border: 1px solid var(--border-bright); border-radius: 4px; box-shadow: 0 8px 25px #0008; }
+.dropdown ul { list-style: none; padding: 0; margin: 0; }
+.dropdown li { display: flex; flex-direction: column; padding: .65rem .8rem; cursor: pointer; border-bottom: 1px solid var(--border); }
+.dropdown li:hover, .activeOption { background: var(--surface-3); color: var(--accent); }
+.dropdown li span, .dropdown p { color: var(--text-mid); font-size: .78rem; }
+.dropdown p { padding: .6rem .8rem; margin: 0; }
+
+/* Reserve the same document height for loading, normal and comparison views. */
+.historyViewer { height: 522px; overflow: hidden; }
+.snapshotStatus { min-height: 3rem; padding: .5rem 0; }
+
+.form:has(.picker) { align-items: start; }
+.form:has(.picker) > button { margin-top: 1.9rem; }

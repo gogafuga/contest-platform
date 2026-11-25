@@ -1,0 +1,48 @@
+.block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.timer {
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--accent-bright);
+  letter-spacing: 0.02em;
+}
+
+.timer.low {
+  color: var(--danger);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.timer.expired {
+  color: var(--text-dim);
+  animation: none;
+}
+
+.waiting {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer.low {
+    animation: none;
+  }
+}

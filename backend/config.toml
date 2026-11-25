@@ -1,0 +1,6 @@
+database_url             = "postgres://contest:contest@localhost:5432/contest01?sslmode=disable"
+port                     = "8080"
+admin_token              = "dev-admin-token"
+static_dir               = ""
+session_ttl_hours        = 336
+contest_duration_seconds = 5400

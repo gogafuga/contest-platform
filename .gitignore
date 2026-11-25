@@ -1,0 +1,51 @@
+# Dependencies / build output
+node_modules/
+dist/
+dist-ssr/
+
+# Env / secrets
+.env
+*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Claude Code harness artifacts
+.claude/
+
+# Local contest launcher artifacts
+.contest/
+work/dev/
+work/load-test/
+
+# Local runtime data, database backups and downloaded tools
+work/
+*.dump
+*.backup
+*.bak
+
+# Private environment and credentials
+.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local assistant context
+AGENTS.md
+.agents/
+.codex/
+.aws/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
